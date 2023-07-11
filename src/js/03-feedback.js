@@ -4,25 +4,31 @@ const message = document.getElementsByName("message")[0];
 const localStorageKey = "feedback-form-state";
 
 
- updateOutput();
+updateOutput();
 form.addEventListener("submit", saveMessage);
 
 function saveMessage(e) {
     e.preventDefault();
     let emailInput = email.value;
     let messageInput = message.value;
-    const result = { "email": emailInput, "message": messageInput };
-    localStorage.setItem(localStorageKey, JSON.stringify(result));
-     updateOutput();
+    let result = { "email": emailInput, "message": messageInput };  
+    updateOutput();
     form.reset();
-    console.log(result);
-   
+    console.log(result)
+    if (localStorage.getItem(localStorageKey)) {
+    localStorage.removeItem(localStorageKey);
+    } else {
+    localStorage.setItem(localStorageKey, JSON.stringify(result));
+    }
+    
 }
 
 function updateOutput() {
-   let formValue = JSON.parse(localStorage.getItem(localStorageKey));
+    if (localStorage.getItem(localStorageKey)) {
+    let formValue = JSON.parse(localStorage.getItem(localStorageKey));
     let emailOutput = formValue["email"];
     let messageOutput = formValue["message"];
     email.value = emailOutput;
     message.value = messageOutput;
+    }
 }
