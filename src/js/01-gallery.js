@@ -7,6 +7,7 @@ import { galleryItems } from './gallery-items';
 // console.log(galleryItems);
 
 const gallery = document.querySelector(".gallery");
+gallery.style.listStyle = "none";
 
 let newGallery = galleryItems.map((item) => {
     const li = `<li class="gallery__item">
@@ -24,3 +25,4 @@ let lightbox = new SimpleLightbox(".gallery a", {
   captionsData: "alt",
   captionDelay: "250ms",
 });
+
